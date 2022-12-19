@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
+import { NotificacionesService } from '../../../notificaciones/notificaciones.service';
 import { UsersService } from '../../../users/users.service'
+import { Notificacion } from 'src/app/notificaciones/notificacion';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +31,8 @@ export class LoginComponent implements OnInit {
     }
   ]
 
-  constructor(private fb: FormBuilder, private router: Router, private userService: UsersService){}
+  constructor(private fb: FormBuilder, private router: Router, private userService: UsersService, 
+    private notificacionService: NotificacionesService){}
 
   
 
@@ -69,11 +71,16 @@ export class LoginComponent implements OnInit {
     let clave = formValue.password;
     let isValid = this.validateUser(usuario, clave);
 
-    if(isValid){
-      let nombre = this.buscaUsuario(usuario);
-      this.userService.setUserName(usuario as string);
-      this.userService.setName(nombre);
-      this.router.navigate(['']);
+    if(usuario != "" && clave != ""){
+      if(isValid){
+        let nombre = this.buscaUsuario(usuario);
+        this.userService.setUserName(usuario as string);
+        this.userService.setName(nombre);
+        this.notificacionService.showToast(Notificacion.SUCCES, "Inicio de sesion exitoso", "");
+        this.router.navigate(['']);
+      } else {
+        this.notificacionService.showToast(Notificacion.DANGER, "Usuario o contraseña incorrecto", "");
+      }
     }
     
   }

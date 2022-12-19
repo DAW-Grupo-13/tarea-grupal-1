@@ -5,6 +5,7 @@ import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { MaterialModule } from 'src/app/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Toaster, ToastNotifications, ToastNotificationsModule } from "ngx-toast-notifications";
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginRoutingModule,
     MaterialModule,
     ReactiveFormsModule
-  ]
+  ],
+  providers: [Toaster, ToastNotifications, ToastNotificationsModule],
 })
 export class LoginModule { }

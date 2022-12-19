@@ -6,6 +6,9 @@
                 <mat-form-field class="full-width-input" appearance="fill">
                     <mat-label>Usuario</mat-label>
                     <input matInput type="text" required formControlName="username" />
+                    <div *ngIf="loginForm.get('username')?.errors && loginForm.get('username')?.dirty">
+                        <p *ngIf="loginForm.get('username')?.hasError('required')"> Campo obligatorio </p>
+                    </div>
                 </mat-form-field>
 
                 <mat-form-field class="full-width-input separator">
@@ -14,6 +17,7 @@
                 </mat-form-field>
 
                 <button mat-raised-button color="primary" type="submit">Login</button>
+                
             </form>
         </mat-card-content>
     </mat-card>

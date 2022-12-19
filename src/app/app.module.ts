@@ -9,6 +9,10 @@ import { FooterComponent } from './footer/footer.component';
 import { MaterialModule } from './material/material.module';
 import { SidebarModule } from './shared/components/sidebar/sidebar.module';
 import { CookieService } from 'ngx-cookie-service';
+import { Toaster, ToastNotificationsModule, ToastType, TOAST_NOTIFICATIONS_CONFIG } from "ngx-toast-notifications";
+
+
+
 
 @NgModule({
   declarations: [
@@ -21,9 +25,12 @@ import { CookieService } from 'ngx-cookie-service';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    SidebarModule
+    SidebarModule,
+    ToastNotificationsModule
   ],
-  providers: [CookieService],
+  providers: [CookieService, Toaster,
+    {provide: TOAST_NOTIFICATIONS_CONFIG, useValue: {duration: 3000, position: "top-right"}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
