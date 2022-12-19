@@ -10,6 +10,8 @@ import { MaterialModule } from './material/material.module';
 import { SidebarModule } from './shared/components/sidebar/sidebar.module';
 import { CookieService } from 'ngx-cookie-service';
 import { Toaster, ToastNotificationsModule, ToastType, TOAST_NOTIFICATIONS_CONFIG } from "ngx-toast-notifications";
+import { HomeModule } from './home/home/home.module';
+import { HomeComponent } from './home/home/home.component';
 
 
 
@@ -18,7 +20,8 @@ import { Toaster, ToastNotificationsModule, ToastType, TOAST_NOTIFICATIONS_CONFI
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    //HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,8 @@ import { Toaster, ToastNotificationsModule, ToastType, TOAST_NOTIFICATIONS_CONFI
     BrowserAnimationsModule,
     MaterialModule,
     SidebarModule,
-    ToastNotificationsModule
+    ToastNotificationsModule,
+   // HomeModule
   ],
   providers: [CookieService, Toaster,
     {provide: TOAST_NOTIFICATIONS_CONFIG, useValue: {duration: 3000, position: "top-right"}}

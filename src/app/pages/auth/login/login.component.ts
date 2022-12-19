@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
         this.userService.setUserName(usuario as string);
         this.userService.setName(nombre);
         this.notificacionService.showToast(Notificacion.SUCCES, "Inicio de sesion exitoso", "");
-        this.router.navigate(['']);
+        this.router.navigate(['inicio']);
       } else {
         this.notificacionService.showToast(Notificacion.DANGER, "Usuario o contraseña incorrecto", "");
       }
