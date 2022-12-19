@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { UsersService } from '../../../users/users.service'
 
 @Component({
   selector: 'app-login',
@@ -28,7 +30,7 @@ export class LoginComponent implements OnInit {
     }
   ]
 
-  constructor(private fb: FormBuilder, private router: Router){}
+  constructor(private fb: FormBuilder, private router: Router, private userService: UsersService){}
 
   
 
@@ -50,13 +52,27 @@ export class LoginComponent implements OnInit {
 
   }
 
+  buscaUsuario(userName: any): string{
+    let valor = " "
+    this.users.forEach(element => {
+      if(element.username == userName){
+        valor = element.name;
+      }
+    });
+    return valor;
+  }
+
   //Inicia sesion
   onLogin(): void{
     const formValue = this.loginForm.value;
-
-    let isValid = this.validateUser(formValue.username, formValue.password);
+    let usuario = formValue.username;
+    let clave = formValue.password;
+    let isValid = this.validateUser(usuario, clave);
 
     if(isValid){
+      let nombre = this.buscaUsuario(usuario);
+      this.userService.setUserName(usuario as string);
+      this.userService.setName(nombre);
       this.router.navigate(['']);
     }
     

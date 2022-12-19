@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { MaterialModule } from './material/material.module';
 import { SidebarModule } from './shared/components/sidebar/sidebar.module';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { SidebarModule } from './shared/components/sidebar/sidebar.module';
     MaterialModule,
     SidebarModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
