@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './sidebar.component';
 import { MaterialModule } from 'src/app/material/material.module';
+import { AppRoutingModule } from '../../../app-routing.module';
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import { MaterialModule } from 'src/app/material/material.module';
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    AppRoutingModule
   ],
   exports: [
     SidebarComponent
