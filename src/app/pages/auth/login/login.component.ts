@@ -20,13 +20,25 @@ export class LoginComponent implements OnInit {
     {
       "id": "1",
       "name": "Douglas Gallardo",
-      "username" : "dgallard",
+      "username" : "dgallardo",
       "password" : "123",
     },
     {
       "id": "2",
       "name": "Ronal Preciado",
       "username" : "rpreciado",
+      "password" : "123",
+    },
+    {
+      "id": "3",
+      "name": "John Guale",
+      "username" : "jguale",
+      "password" : "123",
+    },
+    {
+      "id": "4",
+      "name": "Washington Pastuizaca",
+      "username" : "wpastuizaca",
       "password" : "123",
     }
   ]
