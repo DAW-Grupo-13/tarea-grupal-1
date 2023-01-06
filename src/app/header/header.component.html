@@ -1,7 +1,12 @@
 <mat-toolbar color="primary">
     <ng-container>
-        <span>Tarea Grupal</span>
+
+        <span *ngIf="!isLogged();">Tarea Grupal</span>
+        <button *ngIf="isLogged();" mat-icon-button (click)="onToggleSidenav()">
+            <mat-icon>menu</mat-icon>
+        </button>
         <span class="spacer"></span>
+
         <div>
             <a mat-button *ngIf="!isLogged(); else viewLogout" [routerLink]= "'/login'" >Login</a>
             
