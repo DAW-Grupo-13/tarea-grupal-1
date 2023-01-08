@@ -1,24 +1,27 @@
-<div class="login-form">
-    <mat-card>
-        <mat-card-content>
-            <h1>LOGIN</h1>
-            <form [formGroup]="loginForm" (ngSubmit)="onLogin()">       
-                <mat-form-field class="full-width-input" appearance="fill">
-                    <mat-label>Usuario</mat-label>
-                    <input matInput type="text" required formControlName="username" />
-                    <div *ngIf="loginForm.get('username')?.errors && loginForm.get('username')?.dirty">
-                        <p *ngIf="loginForm.get('username')?.hasError('required')"> Campo obligatorio </p>
-                    </div>
-                </mat-form-field>
-
-                <mat-form-field class="full-width-input separator">
-                    <mat-label>Contraseña</mat-label>
-                    <input matInput type="password" required formControlName="password" />
-                </mat-form-field>
-
-                <button mat-raised-button color="primary" type="submit">Login</button>
-                
-            </form>
-        </mat-card-content>
-    </mat-card>
-</div>
+<!-- <div class="background">
+</div> -->
+    <div class="login-form">
+        <mat-card>
+            <mat-card-content>
+                <h1>LOGIN</h1>
+                <form [formGroup]="loginForm" (ngSubmit)="onLogin()">       
+                    <mat-form-field class="full-width-input" appearance="fill">
+                        <mat-label>Usuario</mat-label>
+                        <input matInput type="text" required formControlName="username" />
+                        <div *ngIf="loginForm.get('username')?.errors && loginForm.get('username')?.dirty">
+                            <p *ngIf="loginForm.get('username')?.hasError('required')"> Campo obligatorio </p>
+                        </div>
+                    </mat-form-field>
+    
+                    <mat-form-field class="full-width-input separator">
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput type="password" required formControlName="password" />
+                    </mat-form-field>
+    
+                    <button mat-raised-button color="primary" type="submit">Login</button>
+                    
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+<!-- </div> -->

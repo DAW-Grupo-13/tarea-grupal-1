@@ -7,3 +7,8 @@ a {
     text-decoration: none;
     color: #fff;
 }
+
+.header{
+    background-color: #c2c224;
+    height: 10%;
+}

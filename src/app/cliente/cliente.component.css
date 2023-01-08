@@ -1,6 +1,9 @@
 .tabla-cliente{
     margin-left: 50px;
     margin-right: 50px;
+    position: relative;
+    margin-bottom: 5%;
+    height: 80%;
 }
 
 .btn-modificar{
