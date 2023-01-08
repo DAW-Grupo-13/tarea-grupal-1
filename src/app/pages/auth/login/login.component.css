@@ -1,5 +1,18 @@
 .login-form{
-    padding: 4rem 1rem;
+    /* padding: 4rem 1rem; */
+    /*float: none;
+    position: center;
+    float: center;
+    z-index: 0;*/
+    background-image: url('../../../../assets/imagen/fondo.webp');
+    padding: 30px;
+}
+
+.background{
+    background-image: url('../../../../assets/imagen/fondo.webp');
+    height: 80%;
+    width: 100%;
+    position: relative;
 }
 
 mat-card{

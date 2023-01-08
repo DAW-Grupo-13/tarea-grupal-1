@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ClienteInterface } from '../interfaces/ClienteInterface';
+import { ClienteInterface } from '../../interfaces/ClienteInterface';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { NavigationExtras, Router } from '@angular/router';
