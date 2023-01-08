@@ -18,7 +18,7 @@
 </mat-toolbar>
 
 <ng-template #viewLogout>
-    <a mat-button>{{getUsuario()}}</a>
+    <a mat-button [routerLink]= "'/inicio'">{{getUsuario()}}</a>
     <a mat-button [routerLink]= "'/login'" (click)="logout()">Logout</a>
 </ng-template>
 

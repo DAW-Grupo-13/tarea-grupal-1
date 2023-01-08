@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ClienteComponent } from './cliente/cliente.component';
 
 const routes: Routes = [
   { path: 'login', 
@@ -7,6 +8,9 @@ const routes: Routes = [
   },
   { path: 'inicio', 
     loadChildren: () => import('./home/home/home.module').then(m => m.HomeModule) 
+  },
+  { path: 'cliente', 
+    component: ClienteComponent 
   }
 ];
 
