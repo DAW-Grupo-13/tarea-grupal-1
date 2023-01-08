@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NavigationExtras, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-modificar-cliente',
@@ -10,9 +12,10 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class ModificarClienteComponent {
 
-  constructor(private router: Router, private dialogRef: MatDialogRef<ModificarClienteComponent>) { }
+  constructor(@Inject(MAT_DIALOG_DATA)public data: {comp: any}, private router: Router, private dialogRef: MatDialogRef<ModificarClienteComponent>) { }
 
   ngOnInit(): void {
+    
   }
 
   //navigationExtras: NavigationExtras={};
@@ -26,7 +29,7 @@ export class ModificarClienteComponent {
   })
 
   
-  onSubmit() {
+  onSubmit(valor: any) {
     let objToSend: NavigationExtras = {
       queryParams: {
         cedula: this.usuarioNuevo.value.cedula,
@@ -41,8 +44,10 @@ export class ModificarClienteComponent {
     };
 
     this.dialogRef.close(); 
-    this.redirectTo('/cliente', objToSend);
-
+    
+    if(valor != undefined && valor!= null){
+      this.redirectTo('/cliente', objToSend);
+    }
   }
 
   redirectTo(uri:string, objToSend:NavigationExtras){

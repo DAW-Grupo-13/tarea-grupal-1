@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ClienteInterface } from '../interfaces/ClienteInterface';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router} from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { ModificarClienteComponent } from '../modificar-cliente/modificar-cliente.component';
+import { MatDialogRef } from '@angular/material/dialog';
+import { toArray } from 'rxjs';
 
 @Component({
   selector: 'app-cliente',
@@ -46,11 +48,12 @@ export class ClienteComponent implements OnInit{
   nuevoCliente:any;
   nav: any;
 
-  constructor(private router: Router, private dialog:MatDialog) { 
+  constructor(private router: Router, public dialog:MatDialog) { 
     
     this.nav = this.router.getCurrentNavigation();
     this.nuevoCliente = this.nav.extras.state;
-  
+    let aux = this.data.filter(a=> a!= undefined);
+    this.data = aux;
     if (this.nuevoCliente != null)
     {      
       console.log(this.nuevoCliente.datosCliente.queryParams);
@@ -67,8 +70,31 @@ export class ClienteComponent implements OnInit{
   openDialogAgregar(){
     this.dialog.open(ModificarClienteComponent, {
       width: '50%',
+      data: {comp: {}}
     })
   }
+
+  modificarCliente(element: any, i: any){
+    console.log(i);
+
+    let aux = this.data.filter(a=> a!= this.data[i]);
+    this.data = aux;
+
+
+    this.dialog.open(ModificarClienteComponent, {
+      width: '50%',
+      data: {comp: element}
+    })
+
+    console.log(this.data);
+
+    //this.redirectTo('/cliente', objToSend);
+  }
+
+  filtrar(event: Event) {
+    const filtro = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filtro.trim().toLowerCase();
+  }  
     
 };
 
