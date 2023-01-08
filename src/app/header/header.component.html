@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar class="header">
     <ng-container>
 
         <span *ngIf="!isLogged();">Tarea Grupal</span>
@@ -9,7 +9,6 @@
 
         <div>
             <a mat-button *ngIf="!isLogged(); else viewLogout" [routerLink]= "'/login'" >Login</a>
-            
         </div>
     </ng-container>
     
@@ -23,7 +22,7 @@
 </ng-template>
 
 <ng-template #viewAdmin>
-    <button mat-icon-button (click)="onToggleSidenav()">
+    <button mat-icon-button (click)="onToggleSidenav()" class="header">
         <mat-icon>menu</mat-icon>
     </button>
     <span class="spacer"></span>

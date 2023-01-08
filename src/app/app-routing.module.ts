@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ClienteComponent } from './cliente/cliente.component';
+import { ClienteComponent } from './modulo-clientes/cliente/cliente.component';
 
 const routes: Routes = [
   { path: 'login', 
