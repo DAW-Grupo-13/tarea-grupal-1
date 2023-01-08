@@ -12,7 +12,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { Toaster, ToastNotificationsModule, ToastType, TOAST_NOTIFICATIONS_CONFIG } from "ngx-toast-notifications";
 import { HomeModule } from './home/home/home.module';
 import { HomeComponent } from './home/home/home.component';
-
+import { ClienteComponent } from './cliente/cliente.component';
+import { ModificarClienteComponent } from './modificar-cliente/modificar-cliente.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -21,6 +23,8 @@ import { HomeComponent } from './home/home/home.component';
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    ClienteComponent,
+    ModificarClienteComponent,
     //HomeComponent
   ],
   imports: [
@@ -30,6 +34,7 @@ import { HomeComponent } from './home/home/home.component';
     MaterialModule,
     SidebarModule,
     ToastNotificationsModule,
+    ReactiveFormsModule
    // HomeModule
   ],
   providers: [CookieService, Toaster,
