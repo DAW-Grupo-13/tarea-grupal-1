@@ -22,7 +22,7 @@ export class ClienteComponent implements OnInit{
         apellidos: 'Carvajal Lozano',
         direccion: 'Quito, Ecuador',
         edad: 50,
-        opciones:'modificar'
+        opciones: 'modificar'
        
       },
       {
