@@ -1,0 +1,31 @@
+<mat-card> 
+    <div style="text-align:center;">
+        <mat-card-title>Nuevo Cliente</mat-card-title>
+    </div>   
+    <br>
+    <form [formGroup]="detalleNuevo">
+        <mat-form-field class="campos-field">
+            <input matInput placeholder="No." formControlName="numero" [(ngModel)]="data.comp.numero">
+        </mat-form-field>
+
+        <mat-form-field class="campos-field">
+            <input matInput placeholder="Producto" formControlName="producto" [(ngModel)]="data.comp.producto">
+        </mat-form-field>
+
+        <mat-form-field class="campos-field">
+            <input matInput placeholder="Cantidad" formControlName="cantidad" [(ngModel)]="data.comp.cantidad">
+        </mat-form-field>
+
+        <mat-form-field class="campos-field">
+            <input matInput placeholder="Precio Unitario" formControlName="precioUnitario" [(ngModel)]="data.comp.precioUnitario">
+        </mat-form-field>
+
+        <mat-form-field class="campos-field">
+            <input matInput placeholder="Precio Total" formControlName="precioTotal" [(ngModel)]="data.comp.precioTotal">
+        </mat-form-field>
+
+        <button mat-raised-button [disabled] = "!detalleNuevo.valid" (click)="onSubmit()">Aceptar</button>  
+        <button mat-raised-button color="accent" (click)="cancelar()">Cancelar</button>      
+    </form>
+    
+</mat-card>
