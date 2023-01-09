@@ -17,7 +17,8 @@ import { ModificarClienteComponent } from './modulo-clientes/modificar-cliente/m
 import { ReactiveFormsModule } from '@angular/forms';
 import { CompraVentaComponent } from './modulo-compra-venta/compra-venta/compra-venta.component';
 import { AgregarDetalleComponent } from './modulo-compra-venta/agregar-detalle/agregar-detalle.component';
-
+import { ProductosComponent } from './modulo-productos/productos/productos.component';
+import { ModificarProductosComponent } from './modulo-productos/modificar-productos/modificar-productos.component';
 
 
 @NgModule({
@@ -29,6 +30,8 @@ import { AgregarDetalleComponent } from './modulo-compra-venta/agregar-detalle/a
     ModificarClienteComponent,
     CompraVentaComponent,
     AgregarDetalleComponent,
+    ProductosComponent,
+    ModificarProductosComponent
     //HomeComponent
   ],
   imports: [
@@ -38,7 +41,7 @@ import { AgregarDetalleComponent } from './modulo-compra-venta/agregar-detalle/a
     MaterialModule,
     SidebarModule,
     ToastNotificationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
    // HomeModule
   ],
   providers: [CookieService, Toaster,
