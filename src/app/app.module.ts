@@ -15,6 +15,8 @@ import { HomeComponent } from './home/home/home.component';
 import { ClienteComponent } from './modulo-clientes/cliente/cliente.component';
 import { ModificarClienteComponent } from './modulo-clientes/modificar-cliente/modificar-cliente.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CompraVentaComponent } from './modulo-compra-venta/compra-venta/compra-venta.component';
+import { AgregarDetalleComponent } from './modulo-compra-venta/agregar-detalle/agregar-detalle.component';
 
 
 
@@ -25,6 +27,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     FooterComponent,
     ClienteComponent,
     ModificarClienteComponent,
+    CompraVentaComponent,
+    AgregarDetalleComponent,
     //HomeComponent
   ],
   imports: [
