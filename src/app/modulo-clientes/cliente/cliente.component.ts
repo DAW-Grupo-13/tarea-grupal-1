@@ -86,9 +86,6 @@ export class ClienteComponent implements OnInit{
       data: {comp: element}
     })
 
-    console.log(this.data);
-
-    //this.redirectTo('/cliente', objToSend);
   }
 
   filtrar(event: Event) {
