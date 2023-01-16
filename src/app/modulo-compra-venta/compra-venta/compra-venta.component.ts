@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
 import { AgregarDetalleComponent } from '../agregar-detalle/agregar-detalle.component';
 import { ComprobanteService } from '../service/comprobante.service';
 
@@ -35,14 +36,25 @@ export class CompraVentaComponent {
   }
 
   eliminarDetalle(index: number){
-    this.comprobanteService.eliminarDetalle(index);
-    this.cargarDetalle();
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.comprobanteService.eliminarDetalle(index);
+        this.cargarDetalle();
+      }
+    });
+
+    
   }
 
   openDialogAgregar(){
     this.dialog.open(AgregarDetalleComponent, {
       width: '50%',
-      data: {comp: {}}
+      data: {
+        comp: {},
+        flag: true
+      }
     })
   }
 
@@ -51,10 +63,14 @@ export class CompraVentaComponent {
 
     this.dialog.open(AgregarDetalleComponent, {
       width: '50%',
-      data: {comp: element}
+      data: {
+        comp: element,
+        flag: false,
+        index: index
+      }
     })
 
-    this.comprobanteService.eliminarDetalle(index);
+    //this.comprobanteService.eliminarDetalle(index);
 
   }
 

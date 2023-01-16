@@ -24,7 +24,7 @@
             <input matInput placeholder="Precio Total" formControlName="precioTotal" [(ngModel)]="data.comp.precioTotal">
         </mat-form-field>
 
-        <button mat-raised-button [disabled] = "!detalleNuevo.valid" (click)="onSubmit()">Aceptar</button>  
+        <button mat-raised-button color="primary" [disabled] = "!detalleNuevo.valid" (click)="onSubmit(data.flag, data.index)">Aceptar</button>  
         <button mat-raised-button color="accent" (click)="cancelar()">Cancelar</button>      
     </form>
     

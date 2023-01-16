@@ -13,7 +13,7 @@ import { ComprobanteService } from '../service/comprobante.service';
 export class AgregarDetalleComponent {
 
 
-  constructor(@Inject(MAT_DIALOG_DATA)public data: {comp: any}, private router: Router, private dialogRef: MatDialogRef<AgregarDetalleComponent>,
+  constructor(@Inject(MAT_DIALOG_DATA)public data: {comp: any, flag: any, index: any}, private router: Router, private dialogRef: MatDialogRef<AgregarDetalleComponent>,
               private serviceComprobante: ComprobanteService) { }
 
   detalleNuevo = new FormGroup({
@@ -25,7 +25,7 @@ export class AgregarDetalleComponent {
   })
 
 
-  onSubmit() {
+  onSubmit(flag: any, index: any) {
     const detalle = {
         numero: this.detalleNuevo.value.numero,
         producto: this.detalleNuevo.value.producto,
@@ -33,11 +33,17 @@ export class AgregarDetalleComponent {
         precioUnitario: this.detalleNuevo.value.precioUnitario,
         precioTotal: this.detalleNuevo.value.precioTotal
       };
-
-    this.serviceComprobante.agregarDetalle(detalle);
+    
+    //Si flag es true crea un nuevo registro
+    //Caso contrario lo actualiza 
+    if(flag == true){
+      this.serviceComprobante.agregarDetalle(detalle);
+    } else {
+      this.serviceComprobante.modificarDetalle(detalle, index);
+    }
+    
     this.redirectTo('/compra-venta', detalle);
     this.dialogRef.close(); 
-    
     
   }
 

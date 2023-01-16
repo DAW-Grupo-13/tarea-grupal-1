@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
 
 const myModules = [
@@ -25,7 +25,7 @@ const myModules = [
   MatFormFieldModule,
   MatInputModule,
   MatDialogModule,
-  MatTableModule
+  MatTableModule,
 ];
 
 @NgModule({
