@@ -20,11 +20,13 @@ export class ModificarProductosComponent {
     
   }
 
+  listaCategoria = ["Plomeria", "Manual", "Electrica", "Iluminacion"];
+
   //navigationExtras: NavigationExtras={};
 
   productoNuevo = new FormGroup({
     codigo: new FormControl('',Validators.required),
-    categoria: new FormControl('',Validators.required),
+    categoria: new FormControl(this.data.comp.categoria,Validators.required),
     idProveedor: new FormControl('', Validators.required),
     descripcion: new FormControl('', Validators.required),
     presioVenta: new FormControl('', Validators.required),

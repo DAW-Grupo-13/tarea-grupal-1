@@ -8,8 +8,17 @@
             <input matInput placeholder="Codigo" formControlName="codigo" [(ngModel)]="data.comp.codigo">
         </mat-form-field>
 
-        <mat-form-field class="campos-field">
+        <!-- <mat-form-field class="campos-field">
             <input matInput placeholder="Categoria" formControlName="categoria" [(ngModel)]="data.comp.categoria">
+        </mat-form-field> -->
+
+        <mat-form-field appearance="fill" class="campos-field">
+            <mat-label>Categoria</mat-label>
+            <mat-select formControlName="categoria">
+                <mat-option *ngFor="let categoria of listaCategoria" [value]="categoria">
+                  {{categoria}}
+                </mat-option>
+            </mat-select>
         </mat-form-field>
 
         <mat-form-field class="campos-field">
