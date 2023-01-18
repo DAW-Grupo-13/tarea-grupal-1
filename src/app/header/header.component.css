@@ -11,4 +11,13 @@ a {
 .header{
     background-color: #c2c224;
     height: 10%;
+    width: 100%;
+}
+
+mat-toolbar{
+    width: 100%;
+}
+
+.container{
+    width: 100%;
 }

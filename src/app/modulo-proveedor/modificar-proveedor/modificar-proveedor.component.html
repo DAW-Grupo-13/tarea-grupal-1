@@ -1,0 +1,36 @@
+<mat-card> 
+    <div style="text-align:center;">
+        <mat-card-title>Nuevo Proveedor</mat-card-title>
+    </div>   
+    <br>
+    <form [formGroup]="usuarioNuevo">
+        
+        <mat-form-field class="campos-field">
+            <input matInput placeholder="Codigo" formControlName="codigo" [(ngModel)]="data.comp.codigo">
+        </mat-form-field>
+        
+        <mat-form-field class="campos-field">
+            <input matInput placeholder="Ruc" formControlName="ruc" [(ngModel)]="data.comp.ruc">
+        </mat-form-field>
+
+        <mat-form-field class="campos-field">
+            <input matInput placeholder="Nombres" formControlName="nombres" [(ngModel)]="data.comp.nombres">
+        </mat-form-field>
+
+        <mat-form-field class="campos-field">
+            <input matInput placeholder="Direccion" formControlName="direccion" [(ngModel)]="data.comp.direccion">
+        </mat-form-field>
+
+        <mat-form-field class="campos-field">
+            <input matInput placeholder="Telefono" formControlName="telefono" [(ngModel)]="data.comp.telefono">
+        </mat-form-field>
+
+        <mat-form-field class="campos-field">
+            <input matInput placeholder="Email" formControlName="email" [(ngModel)]="data.comp.email">
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" [disabled] = "!usuarioNuevo.valid" (click)="onSubmit(data.flag, data.index)">Aceptar</button>  
+        <button mat-raised-button color="accent" (click)="cancelar()">Cancelar</button>      
+    </form>
+    
+</mat-card>

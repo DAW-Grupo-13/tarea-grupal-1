@@ -21,8 +21,17 @@
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="campos-field">
+        <!-- <mat-form-field class="campos-field">
             <input matInput placeholder="Id Proveedor" formControlName="idProveedor" [(ngModel)]="data.comp.idProveedor">
+        </mat-form-field> -->
+
+        <mat-form-field appearance="fill" class="campos-field">
+            <mat-label>Proveedor</mat-label>
+            <mat-select formControlName="idProveedor">
+                <mat-option *ngFor="let proveedor of listaProveedor" [value]="proveedor.codigo">
+                  {{proveedor.nombres}}
+                </mat-option>
+            </mat-select>
         </mat-form-field>
 
         <mat-form-field class="campos-field">

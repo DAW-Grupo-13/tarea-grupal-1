@@ -20,6 +20,8 @@ import { AgregarDetalleComponent } from './modulo-compra-venta/agregar-detalle/a
 import { ProductosComponent } from './modulo-productos/productos/productos.component';
 import { ModificarProductosComponent } from './modulo-productos/modificar-productos/modificar-productos.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { ProveedorComponent } from './modulo-proveedor/proveedor/proveedor.component';
+import { ModificarProveedorComponent } from './modulo-proveedor/modificar-proveedor/modificar-proveedor.component';
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     AgregarDetalleComponent,
     ProductosComponent,
     ModificarProductosComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    ProveedorComponent,
+    ModificarProveedorComponent
     //HomeComponent
   ],
   imports: [

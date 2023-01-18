@@ -1,29 +1,32 @@
-<mat-toolbar class="header">
-    <ng-container>
-
-        <span *ngIf="!isLogged();">Proyecto Semestral: "FerreMás"</span>
-        <button *ngIf="isLogged();" mat-icon-button (click)="onToggleSidenav()">
+<div class="container">
+    <mat-toolbar class="header">
+        <ng-container>
+    
+            <span *ngIf="!isLogged();">Proyecto Semestral: "FerreMás"</span>
+            <button *ngIf="isLogged();" mat-icon-button (click)="onToggleSidenav()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span class="spacer"></span>
+    
+            <div>
+                <a mat-button *ngIf="!isLogged(); else viewLogout" [routerLink]= "'/login'" >Login</a>
+            </div>
+        </ng-container>
+        
+    
+        <!-- <button (click)="getUsuario()">Change</button> -->
+    </mat-toolbar>
+    
+    <ng-template #viewLogout>
+        <a mat-button [routerLink]= "'/inicio'">{{getUsuario()}}</a>
+        <a mat-button [routerLink]= "'/login'" (click)="logout()">Logout</a>
+    </ng-template>
+    
+    <ng-template #viewAdmin>
+        <button mat-icon-button (click)="onToggleSidenav()" class="header">
             <mat-icon>menu</mat-icon>
         </button>
         <span class="spacer"></span>
-
-        <div>
-            <a mat-button *ngIf="!isLogged(); else viewLogout" [routerLink]= "'/login'" >Login</a>
-        </div>
-    </ng-container>
+    </ng-template>
     
-
-    <!-- <button (click)="getUsuario()">Change</button> -->
-</mat-toolbar>
-
-<ng-template #viewLogout>
-    <a mat-button [routerLink]= "'/inicio'">{{getUsuario()}}</a>
-    <a mat-button [routerLink]= "'/login'" (click)="logout()">Logout</a>
-</ng-template>
-
-<ng-template #viewAdmin>
-    <button mat-icon-button (click)="onToggleSidenav()" class="header">
-        <mat-icon>menu</mat-icon>
-    </button>
-    <span class="spacer"></span>
-</ng-template>
+</div>

@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NavigationExtras, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductoService } from '../service/producto.service';
+import { ProveedorService } from 'src/app/modulo-proveedor/service/proveedor.service';
 
 
 @Component({
@@ -13,11 +14,25 @@ import { ProductoService } from '../service/producto.service';
 })
 export class ModificarProductosComponent {
 
+  listaProveedor = [
+    {
+      codigo: '1001',
+      ruc: '0151245245001',      
+      nombres: 'Finpac S.A',
+      direccion: 'Guayaquil, Ecuador',
+      telefono: '0940745894',
+      email: 'finpac@hotmail.com'
+     
+    }
+  ]
+
   constructor(@Inject(MAT_DIALOG_DATA)public data: {comp: any, flag: any, index: any}, private router: Router, private dialogRef: MatDialogRef<ModificarProductosComponent>,
-  private productoService: ProductoService) { }
+  private productoService: ProductoService, private proveedorService: ProveedorService) {
+    this.getProveedor();
+  }
 
   ngOnInit(): void {
-    
+    this.getProveedor();
   }
 
   listaCategoria = ["Plomeria", "Manual", "Electrica", "Iluminacion"];
@@ -27,7 +42,7 @@ export class ModificarProductosComponent {
   productoNuevo = new FormGroup({
     codigo: new FormControl('',Validators.required),
     categoria: new FormControl(this.data.comp.categoria,Validators.required),
-    idProveedor: new FormControl('', Validators.required),
+    idProveedor: new FormControl(this.data.comp.idProveedor, Validators.required),
     descripcion: new FormControl('', Validators.required),
     presioVenta: new FormControl('', Validators.required),
     presioCompra: new FormControl('', Validators.required),
@@ -59,10 +74,14 @@ export class ModificarProductosComponent {
     
   }
     
-      redirectTo(uri:string, detalle: any){
-        this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-        this.router.navigate([uri],{ state: { data: detalle}}));
-      }
+  redirectTo(uri:string, detalle: any){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this.router.navigate([uri],{ state: { data: detalle}}));
+  }
+
+  getProveedor(){
+    this.listaProveedor = this.proveedorService.getDetalle();
+  }
 
   cancelar()
   {
