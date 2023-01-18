@@ -11,6 +11,8 @@ import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 const myModules = [
   CommonModule,
@@ -26,6 +28,9 @@ const myModules = [
   MatInputModule,
   MatDialogModule,
   MatTableModule,
+  MatOptionModule,
+  MatInputModule,
+  MatSelectModule
 ];
 
 @NgModule({

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NavigationExtras, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { ClienteServiceService } from '../service/cliente-service.service';
 
 
 @Component({
@@ -12,7 +13,8 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ModificarClienteComponent {
 
-  constructor(@Inject(MAT_DIALOG_DATA)public data: {comp: any}, private router: Router, private dialogRef: MatDialogRef<ModificarClienteComponent>) { }
+  constructor(@Inject(MAT_DIALOG_DATA)public data: {comp: any, flag: any, index: any}, private router: Router, private dialogRef: MatDialogRef<ModificarClienteComponent>,
+  private clienteService: ClienteServiceService) { }
 
   ngOnInit(): void {
     
@@ -29,30 +31,31 @@ export class ModificarClienteComponent {
   })
 
   
-  onSubmit(valor: any) {
-    let objToSend: NavigationExtras = {
-      queryParams: {
-        cedula: this.usuarioNuevo.value.cedula,
-        nombres: this.usuarioNuevo.value.nombres,
-        apellidos: this.usuarioNuevo.value.apellidos,
-        direccion: this.usuarioNuevo.value.direccion,
-        edad: this.usuarioNuevo.value.edad,
-        opciones: 'modificar'
-      },
-      skipLocationChange: false,
-      fragment: 'top' 
+  onSubmit(flag: any, index: any) {
+    const detalle = {
+      cedula: this.usuarioNuevo.value.cedula,
+      nombres: this.usuarioNuevo.value.nombres,
+      apellidos: this.usuarioNuevo.value.apellidos,
+      direccion: this.usuarioNuevo.value.direccion,
+      edad: this.usuarioNuevo.value.edad
     };
 
-    this.dialogRef.close(); 
-    
-    if(valor != undefined && valor!= null){
-      this.redirectTo('/cliente', objToSend);
+    //Si flag es true crea un nuevo registro
+    //Caso contrario lo actualiza 
+    if(flag == true){
+      this.clienteService.agregar(detalle);
+    } else {
+      this.clienteService.modificar(detalle, index);
     }
+    
+    this.redirectTo('/cliente', detalle);
+    this.dialogRef.close();
+    
   }
 
-  redirectTo(uri:string, objToSend:NavigationExtras){
+  redirectTo(uri:string, detalle: any){
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-    this.router.navigate([uri],{ state: { datosCliente: objToSend}}));
+    this.router.navigate([uri],{ state: { data: detalle}}));
   }
 
   cancelar()

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NavigationExtras, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { ProductoService } from '../service/producto.service';
 
 
 @Component({
@@ -12,7 +13,8 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ModificarProductosComponent {
 
-  constructor(@Inject(MAT_DIALOG_DATA)public data: {comp: any}, private router: Router, private dialogRef: MatDialogRef<ModificarProductosComponent>) { }
+  constructor(@Inject(MAT_DIALOG_DATA)public data: {comp: any, flag: any, index: any}, private router: Router, private dialogRef: MatDialogRef<ModificarProductosComponent>,
+  private productoService: ProductoService) { }
 
   ngOnInit(): void {
     
@@ -31,33 +33,34 @@ export class ModificarProductosComponent {
   })
 
   
-  onSubmit(valor: any) {
-    let objToSend: NavigationExtras = {
-      queryParams: {
-        codigo: this.productoNuevo.value.codigo,
-        categoria: this.productoNuevo.value.categoria,
-        idProveedor: this.productoNuevo.value.idProveedor,
-        descripcion: this.productoNuevo.value.descripcion,
-        presioVenta: this.productoNuevo.value.presioVenta,
-        presioCompra: this.productoNuevo.value.presioCompra,
-        stock: this.productoNuevo.value.stock,
-        opciones: 'modificar'
-      },
-      skipLocationChange: false,
-      fragment: 'top' 
+  onSubmit(flag: any, index: any) {
+    const detalle = {
+      codigo: this.productoNuevo.value.codigo,
+      categoria: this.productoNuevo.value.categoria,
+      idProveedor: this.productoNuevo.value.idProveedor,
+      descripcion: this.productoNuevo.value.descripcion,
+      presioVenta: this.productoNuevo.value.presioVenta,
+      presioCompra: this.productoNuevo.value.presioCompra,
+      stock: this.productoNuevo.value.stock
     };
 
-    this.dialogRef.close(); 
-    
-    if(valor != undefined && valor!= null){
-      this.redirectTo('/productos', objToSend);
+    //Si flag es true crea un nuevo registro
+    //Caso contrario lo actualiza 
+    if(flag == true){
+      this.productoService.agregar(detalle);
+    } else {
+      this.productoService.modificar(detalle, index);
     }
+    
+    this.redirectTo('/productos', detalle);
+    this.dialogRef.close();
+    
   }
-
-  redirectTo(uri:string, objToSend:NavigationExtras){
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-    this.router.navigate([uri],{ state: { datosproductos: objToSend}}));
-  }
+    
+      redirectTo(uri:string, detalle: any){
+        this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+        this.router.navigate([uri],{ state: { data: detalle}}));
+      }
 
   cancelar()
   {

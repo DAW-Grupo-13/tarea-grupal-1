@@ -1,6 +1,6 @@
 <mat-card> 
     <div style="text-align:center;">
-        <mat-card-title>Nuevo Cliente</mat-card-title>
+        <mat-card-title>Nuevo Detalle</mat-card-title>
     </div>   
     <br>
     <form [formGroup]="detalleNuevo">
@@ -8,8 +8,17 @@
             <input matInput placeholder="No." formControlName="numero" [(ngModel)]="data.comp.numero">
         </mat-form-field>
 
-        <mat-form-field class="campos-field">
+        <!-- <mat-form-field class="campos-field">
             <input matInput placeholder="Producto" formControlName="producto" [(ngModel)]="data.comp.producto">
+        </mat-form-field> -->
+
+        <mat-form-field appearance="fill" class="campos-field">
+            <mat-label>Producto</mat-label>
+            <mat-select>
+                <mat-option *ngFor="let producto of listaProductos" [value]="producto.descripcion">
+                  {{producto.descripcion}}
+                </mat-option>
+            </mat-select>
         </mat-form-field>
 
         <mat-form-field class="campos-field">

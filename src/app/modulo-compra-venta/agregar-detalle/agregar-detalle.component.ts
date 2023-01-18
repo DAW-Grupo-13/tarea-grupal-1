@@ -3,6 +3,7 @@ import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NavigationExtras, Router } from '@angular/router';
+import { ProductoService } from 'src/app/modulo-productos/service/producto.service';
 import { ComprobanteService } from '../service/comprobante.service';
 
 @Component({
@@ -12,9 +13,25 @@ import { ComprobanteService } from '../service/comprobante.service';
 })
 export class AgregarDetalleComponent {
 
+  listaProductos = [{
+    codigo: '10025',      
+    categoria: 'Electrica',
+    idProveedor: '1001',
+    descripcion: 'Taladro Domestico',
+    presioVenta: 50,
+    presioCompra: 45,
+    stock: 50
+   
+  }];
 
   constructor(@Inject(MAT_DIALOG_DATA)public data: {comp: any, flag: any, index: any}, private router: Router, private dialogRef: MatDialogRef<AgregarDetalleComponent>,
-              private serviceComprobante: ComprobanteService) { }
+              private serviceComprobante: ComprobanteService, private productoService: ProductoService) { 
+    this.getProductos();
+  }
+  
+  ngOnInit(): void{
+    this.getProductos();
+  }
 
   detalleNuevo = new FormGroup({
     numero: new FormControl('',Validators.required),
@@ -45,6 +62,10 @@ export class AgregarDetalleComponent {
     this.redirectTo('/compra-venta', detalle);
     this.dialogRef.close(); 
     
+  }
+
+  getProductos(){
+    this.listaProductos = this.productoService.getDetalle();
   }
 
   redirectTo(uri:string, detalle: any){

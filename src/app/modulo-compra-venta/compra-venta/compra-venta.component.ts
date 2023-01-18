@@ -70,8 +70,6 @@ export class CompraVentaComponent {
       }
     })
 
-    //this.comprobanteService.eliminarDetalle(index);
-
   }
 
 

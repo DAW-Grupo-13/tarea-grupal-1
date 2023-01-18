@@ -6,6 +6,8 @@ import { NavigationExtras, Router } from '@angular/router';
 import { ModificarProductosComponent } from '../modificar-productos/modificar-productos.component';
 import { MatDialogRef } from '@angular/material/dialog';
 import { toArray } from 'rxjs';
+import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
+import { ProductoService } from '../service/producto.service';
 
 @Component({
   selector: 'app-productos',
@@ -16,96 +18,63 @@ export class ProductosComponent implements OnInit{
   dataSource: any = [];
   displayedColumns: string[] = ['codigo','categoria', 'idProveedor','descripcion','presioVenta','presioCompra','stock','opciones']
   
-  data = [{
-        codigo: '10025',      
-        categoria: 'Electrica',
-        idProveedor: '1001',
-        descripcion: 'Taladro Domestico',
-        presioVenta: 50,
-        presioCompra: 45,
-        stock: 50,
-        opciones:'modificar'
-       
-      },
-      {
-        codigo: '10026',      
-        categoria: 'Plomeria',
-        idProveedor: '1001',
-        descripcion: 'Tubo PLastico',
-        presioVenta: 12,
-        presioCompra: 10,
-        stock: 25,
-        opciones:'modificar'
-       
-      },
-      {
-        codigo: '10027',      
-        categoria: 'Manual',
-        idProveedor: '1001',
-        descripcion: 'Destornillador Plano',
-        presioVenta: 5,
-        presioCompra: 3.5,
-        stock: 200,
-        opciones:'modificar'
-       
-      },
-      {
-        codigo: '10028',      
-        categoria: 'Iluminacion',
-        idProveedor: '1001',
-        descripcion: 'Boquilla de ceramica',
-        presioVenta: 20,
-        presioCompra: 18,
-        stock: 100,
-        opciones:'modificar'
-       
-      }
-    ];
+  listProducto:any[] = [];
   
   nuevoProductos:any;
   nav: any;
 
-  constructor(private router: Router, public dialog:MatDialog) { 
+  constructor(private router: Router, public dialog:MatDialog, private productoService: ProductoService) { 
     
-    this.nav = this.router.getCurrentNavigation();
-    this.nuevoProductos = this.nav.extras.state;
-    let aux = this.data.filter(a=> a!= undefined);
-    this.data = aux;
-    if (this.nuevoProductos != null)
-    {      
-      console.log(this.nuevoProductos.datosProductos.queryParams);
-      this.data.push(this.nuevoProductos.datosProductos.queryParams);
-    }
+    this.cargarDetalle();
     
   };
 
+
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<ProductosInterface>(this.data as ProductosInterface[]);
-    console.log(this.data);
+    this.cargarDetalle();
+  }
+
+  cargarDetalle(){
+    this.listProducto = this.productoService.getDetalle();
+    this.dataSource = new MatTableDataSource(this.listProducto);
   }
   
   openDialogAgregar(){
     this.dialog.open(ModificarProductosComponent, {
       width: '50%',
-      data: {comp: {}}
+      height: '90%',
+      data: {
+        comp: {},
+        flag: true
+      }
     })
   }
 
-  modificarProductos(element: any, i: any){
-    console.log(i);
-
-    let aux = this.data.filter(a=> a!= this.data[i]);
-    this.data = aux;
+  modificarProducto(element:any, index: number){
 
 
     this.dialog.open(ModificarProductosComponent, {
       width: '50%',
-      data: {comp: element}
+      data: {
+        comp: element,
+        flag: false,
+        index: index
+      }
     })
 
-    console.log(this.data);
+  }
 
-    //this.redirectTo('/productos', objToSend);
+  eliminarProducto(index: number){
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.productoService.eliminar(index);
+        this.cargarDetalle();
+      }
+    });
+
+    
   }
 
   filtrar(event: Event) {

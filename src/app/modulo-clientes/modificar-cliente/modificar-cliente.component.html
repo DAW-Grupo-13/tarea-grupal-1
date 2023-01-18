@@ -24,7 +24,7 @@
             <input matInput placeholder="Edad" formControlName="edad" [(ngModel)]="data.comp.edad">
         </mat-form-field>
 
-        <button mat-raised-button [disabled] = "!usuarioNuevo.valid" (click)="onSubmit(data.comp.cedula)">Aceptar</button>  
+        <button mat-raised-button [disabled] = "!usuarioNuevo.valid" (click)="onSubmit(data.flag, data.index)">Aceptar</button>  
         <button mat-raised-button color="accent" (click)="cancelar()">Cancelar</button>      
     </form>
     

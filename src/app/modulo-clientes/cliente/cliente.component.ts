@@ -6,6 +6,8 @@ import { NavigationExtras, Router } from '@angular/router';
 import { ModificarClienteComponent } from '../modificar-cliente/modificar-cliente.component';
 import { MatDialogRef } from '@angular/material/dialog';
 import { toArray } from 'rxjs';
+import { ClienteServiceService } from '../service/cliente-service.service';
+import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-cliente',
@@ -15,77 +17,61 @@ import { toArray } from 'rxjs';
 export class ClienteComponent implements OnInit{
   dataSource: any = [];
   displayedColumns: string[] = ['cedula','nombres', 'apellidos','direccion','edad','opciones']
-  
-  data = [{
-        cedula: '0151245245',      
-        nombres: 'Andrés Luis',
-        apellidos: 'Carvajal Lozano',
-        direccion: 'Quito, Ecuador',
-        edad: 50,
-        opciones: 'modificar'
-       
-      },
-      {
-        cedula: '0954658913',      
-        nombres: 'Jorge Luis',
-        apellidos: 'Charco Aguirre',
-        direccion: 'Guayaquil, Ecuador',
-        edad: 36,
-        opciones:'modificar'
-       
-      },
-      {
-        cedula: '0957962158',      
-        nombres: 'Andrea Lisbeth',
-        apellidos: 'Romero Haro',
-        direccion: 'Guayaquil, Ecuador',
-        edad: 45,
-        opciones:'modificar'
-       
-      }
-    ];
-  
+    
   nuevoCliente:any;
   nav: any;
+  listCliente:any[] = [];
 
-  constructor(private router: Router, public dialog:MatDialog) { 
+  constructor(private router: Router, public dialog:MatDialog, private clienteService: ClienteServiceService) { 
     
-    this.nav = this.router.getCurrentNavigation();
-    this.nuevoCliente = this.nav.extras.state;
-    let aux = this.data.filter(a=> a!= undefined);
-    this.data = aux;
-    if (this.nuevoCliente != null)
-    {      
-      console.log(this.nuevoCliente.datosCliente.queryParams);
-      this.data.push(this.nuevoCliente.datosCliente.queryParams);
-    }
+    this.cargarDetalle();
     
   };
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<ClienteInterface>(this.data as ClienteInterface[]);
-    console.log(this.data);
+    this.cargarDetalle();
+  }
+
+  cargarDetalle(){
+    this.listCliente = this.clienteService.getDetalle();
+    this.dataSource = new MatTableDataSource(this.listCliente);
   }
   
   openDialogAgregar(){
     this.dialog.open(ModificarClienteComponent, {
       width: '50%',
-      data: {comp: {}}
+      data: {
+        comp: {},
+        flag: true
+      }
     })
   }
 
-  modificarCliente(element: any, i: any){
-    console.log(i);
-
-    let aux = this.data.filter(a=> a!= this.data[i]);
-    this.data = aux;
+  modificarCliente(element:any, index: number){
 
 
     this.dialog.open(ModificarClienteComponent, {
       width: '50%',
-      data: {comp: element}
+      data: {
+        comp: element,
+        flag: false,
+        index: index
+      }
     })
 
+  }
+
+  eliminarCliente(index: number){
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.clienteService.eliminar(index);
+        this.cargarDetalle();
+      }
+    });
+
+    
   }
 
   filtrar(event: Event) {
