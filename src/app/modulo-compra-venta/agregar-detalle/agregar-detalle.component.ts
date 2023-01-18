@@ -34,21 +34,38 @@ export class AgregarDetalleComponent {
   }
 
   detalleNuevo = new FormGroup({
-    numero: new FormControl('',Validators.required),
-    producto: new FormControl('',Validators.required),
+    numero: new FormControl(),
+    producto: new FormControl(this.data.comp.numero, Validators.required),
     cantidad: new FormControl('', Validators.required),
-    precioUnitario: new FormControl('', Validators.required),
-    precioTotal: new FormControl('', Validators.required)
+    precioUnitario: new FormControl(),
+    precioTotal: new FormControl()
   })
 
 
   onSubmit(flag: any, index: any) {
+    let auxProducto:any = {
+      codigo: '10027',      
+      categoria: 'Manual',
+      idProveedor: '1001',
+      descripcion: 'Destornillador Plano',
+      presioVenta: 5,
+      presioCompra: 3.5,
+      stock: 200
+    }
+
+
+    let code = this.detalleNuevo.value.producto;
+    auxProducto = this.productoService.buscarPorCodigo(code);
+    let cant:any = this.detalleNuevo.value.cantidad;
+    let precioU:any = auxProducto.presioVenta;
+    let precioTotal =  cant * precioU;
+
     const detalle = {
-        numero: this.detalleNuevo.value.numero,
-        producto: this.detalleNuevo.value.producto,
+        numero: code,
+        producto: auxProducto.descripcion,
         cantidad: this.detalleNuevo.value.cantidad,
-        precioUnitario: this.detalleNuevo.value.precioUnitario,
-        precioTotal: this.detalleNuevo.value.precioTotal
+        precioUnitario: precioU,
+        precioTotal: precioTotal
       };
     
     //Si flag es true crea un nuevo registro

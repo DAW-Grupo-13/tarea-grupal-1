@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ProductoService {
-  listProducto: any = [{
+  listProducto = [{
     codigo: '10025',      
     categoria: 'Electrica',
     idProveedor: '1001',
@@ -62,5 +62,15 @@ export class ProductoService {
 
   modificar(detalle: any, index: number){
     this.listProducto[index] = detalle;
+  }
+
+  buscarPorCodigo(codigo: any){
+    let aux:any;
+    this.listProducto.forEach(element => {
+      if(element.codigo == codigo){
+        aux = element;
+      }
+    });
+    return aux;
   }
 }

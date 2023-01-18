@@ -7,14 +7,14 @@ export class ComprobanteService {
 
   listComprobante: any = [
     {
-      numero: '1',
+      numero: '10026',
       producto: 'Tubo Plastico',
       cantidad: 2,
       precioUnitario: 2.00,
       precioTotal: 4.00
     },
     {
-      numero: '2',
+      numero: '10025',
       producto: 'Taladro Domestico',
       cantidad: 1,
       precioUnitario: 24.99,
