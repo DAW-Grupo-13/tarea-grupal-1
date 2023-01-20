@@ -44,12 +44,20 @@ export class LoginComponent implements OnInit {
   ]
 
   constructor(private fb: FormBuilder, private router: Router, private userService: UsersService, 
-    private notificacionService: NotificacionesService){}
+    private notificacionService: NotificacionesService){
+      let name = this.userService.getName();
+      if(name != null && name != ""){
+        this.router.navigate(['inicio']);
+      }
+    }
 
   
 
   ngOnInit(): void {
-    
+    let name = this.userService.getName();
+    if(name == null || name == undefined){
+      this.router.navigate(['inicio']);
+    }
   }
 
   //Valida usuario de acuerdo al array de usuarios validos

@@ -6,6 +6,9 @@ import { ProductosComponent } from './modulo-productos/productos/productos.compo
 import { ProveedorComponent } from './modulo-proveedor/proveedor/proveedor.component';
 
 const routes: Routes = [
+  { path: '', 
+    loadChildren: () => import('./pages/auth/login/login.module').then(m => m.LoginModule) 
+  },
   { path: 'login', 
     loadChildren: () => import('./pages/auth/login/login.module').then(m => m.LoginModule) 
   },
