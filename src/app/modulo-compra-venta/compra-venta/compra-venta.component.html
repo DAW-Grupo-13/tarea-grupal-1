@@ -2,13 +2,15 @@
 <div class="tabla-compra">
     
     <br>
-        <button mat-raised-button color="accent" (click)="openDialogAgregar()"> Agregar</button>
+    <h1>Compra/Venta</h1>
+    <br>
+        <button mat-raised-button color="primary" (click)="openDialogAgregar()"> Agregar</button>
     <br><br>
 
     
     <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource">
         <ng-container matColumnDef="numero">
-            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <th mat-header-cell *matHeaderCellDef> Codigo Producto </th>
             <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
         </ng-container>
 
@@ -24,12 +26,12 @@
 
         <ng-container matColumnDef="precioUnitario">
             <th mat-header-cell *matHeaderCellDef> Precio Unitario </th>
-            <td mat-cell *matCellDef="let element"> {{element.precioUnitario}} </td>
+            <td mat-cell *matCellDef="let element"> $ {{element.precioUnitario}} </td>
         </ng-container>
 
         <ng-container matColumnDef="precioTotal">
             <th mat-header-cell *matHeaderCellDef> Precio Total </th>
-            <td mat-cell *matCellDef="let element"> {{element.precioTotal}} </td>  
+            <td mat-cell *matCellDef="let element"> $ {{element.precioTotal}} </td>  
         </ng-container>
 
         <ng-container matColumnDef="opciones">

@@ -8,12 +8,30 @@
             <input matInput placeholder="Codigo" formControlName="codigo" [(ngModel)]="data.comp.codigo">
         </mat-form-field>
 
-        <mat-form-field class="campos-field">
+        <!-- <mat-form-field class="campos-field">
             <input matInput placeholder="Categoria" formControlName="categoria" [(ngModel)]="data.comp.categoria">
+        </mat-form-field> -->
+
+        <mat-form-field appearance="fill" class="campos-field">
+            <mat-label>Categoria</mat-label>
+            <mat-select formControlName="categoria">
+                <mat-option *ngFor="let categoria of listaCategoria" [value]="categoria">
+                  {{categoria}}
+                </mat-option>
+            </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="campos-field">
-            <input matInput placeholder="IdProveedor" formControlName="idProveedor" [(ngModel)]="data.comp.idProveedor">
+        <!-- <mat-form-field class="campos-field">
+            <input matInput placeholder="Id Proveedor" formControlName="idProveedor" [(ngModel)]="data.comp.idProveedor">
+        </mat-form-field> -->
+
+        <mat-form-field appearance="fill" class="campos-field">
+            <mat-label>Proveedor</mat-label>
+            <mat-select formControlName="idProveedor">
+                <mat-option *ngFor="let proveedor of listaProveedor" [value]="proveedor.codigo">
+                  {{proveedor.nombres}}
+                </mat-option>
+            </mat-select>
         </mat-form-field>
 
         <mat-form-field class="campos-field">
@@ -21,18 +39,18 @@
         </mat-form-field>
 
         <mat-form-field class="campos-field">
-            <input matInput placeholder="PresioVenta" formControlName="presioVenta" [(ngModel)]="data.comp.presioVenta">
+            <input matInput placeholder="Precio Venta" formControlName="presioVenta" [(ngModel)]="data.comp.presioVenta">
         </mat-form-field>
 
         <mat-form-field class="campos-field">
-            <input matInput placeholder="PresioCompra" formControlName="presioCompra" [(ngModel)]="data.comp.presioCompra">
+            <input matInput placeholder="Precio Compra" formControlName="presioCompra" [(ngModel)]="data.comp.presioCompra">
         </mat-form-field>
 
         <mat-form-field class="campos-field">
             <input matInput placeholder="Stock" formControlName="stock" [(ngModel)]="data.comp.stock">
         </mat-form-field>
 
-        <button mat-raised-button [disabled] = "!productoNuevo.valid" (click)="onSubmit(data.comp.codigo)">Aceptar</button>  
+        <button mat-raised-button [disabled] = "!productoNuevo.valid" (click)="onSubmit(data.flag, data.index)">Aceptar</button>  
         <button mat-raised-button color="accent" (click)="cancelar()">Cancelar</button>      
     </form>
     

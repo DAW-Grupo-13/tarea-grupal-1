@@ -3,8 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { ClienteComponent } from './modulo-clientes/cliente/cliente.component';
 import { CompraVentaComponent } from './modulo-compra-venta/compra-venta/compra-venta.component';
 import { ProductosComponent } from './modulo-productos/productos/productos.component';
+import { ProveedorComponent } from './modulo-proveedor/proveedor/proveedor.component';
 
 const routes: Routes = [
+  { path: '', 
+    loadChildren: () => import('./pages/auth/login/login.module').then(m => m.LoginModule) 
+  },
   { path: 'login', 
     loadChildren: () => import('./pages/auth/login/login.module').then(m => m.LoginModule) 
   },
@@ -19,6 +23,9 @@ const routes: Routes = [
   },
   { path: 'productos', 
     component: ProductosComponent 
+  },
+  { path: 'proveedor', 
+    component: ProveedorComponent 
   }
 ];
 
