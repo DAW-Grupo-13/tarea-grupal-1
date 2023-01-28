@@ -1,48 +1,47 @@
+
 import { Component, OnInit } from '@angular/core';
-import { ProductosInterface } from '../../interfaces/ProductosInterface';
+// import { ProveedorInterface } from '../../interfaces/ProveedorInterface';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { NavigationExtras, Router } from '@angular/router';
-import { ModificarProductosComponent } from '../modificar-productos/modificar-productos.component';
+import { ModificarProveedorComponent } from '../modificar-proveedor/modificar-proveedor.component';
 import { MatDialogRef } from '@angular/material/dialog';
 import { toArray } from 'rxjs';
+import { ProveedorService } from '../service/proveedor.service';
 import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
-import { ProductoService } from '../service/producto.service';
-
 @Component({
-  selector: 'app-productos',
-  templateUrl: './productos.component.html',
-  styleUrls: ['./productos.component.css']
+  selector: 'app-proveedor',
+  templateUrl: './proveedor.component.html',
+  styleUrls: ['./proveedor.component.css']
 })
-export class ProductosComponent implements OnInit{
+export class ProveedorComponent implements OnInit{
   dataSource: any = [];
-  displayedColumns: string[] = ['codigo','categoria', 'idProveedor','descripcion','presioVenta','presioCompra','stock','opciones']
+  displayedColumns: string[] = ['codigo','ruc','nombres', 'direccion','telefono','email','opciones']
   
-  listProducto:any[] = [];
+  listProveedor:any[] = [];
   
-  nuevoProductos:any;
+  nuevoProveedor:any;
   nav: any;
 
-  constructor(private router: Router, public dialog:MatDialog, private productoService: ProductoService) { 
+  constructor(private router: Router, public dialog:MatDialog, private proveedorService: ProveedorService) { 
     
+       
     this.cargarDetalle();
     
   };
-
 
   ngOnInit(): void {
     this.cargarDetalle();
   }
 
   cargarDetalle(){
-    this.listProducto = this.productoService.getDetalle();
-    this.dataSource = new MatTableDataSource(this.listProducto);
+    this.listProveedor = this.proveedorService.getDetalle();
+    this.dataSource = new MatTableDataSource(this.listProveedor);
   }
   
   openDialogAgregar(){
-    this.dialog.open(ModificarProductosComponent, {
+    this.dialog.open(ModificarProveedorComponent, {
       width: '50%',
-      height: '90%',
       data: {
         comp: {},
         flag: true
@@ -50,10 +49,10 @@ export class ProductosComponent implements OnInit{
     })
   }
 
-  modificarProducto(element:any, index: number){
+  modificarProveedor(element:any, index: number){
 
 
-    this.dialog.open(ModificarProductosComponent, {
+    this.dialog.open(ModificarProveedorComponent, {
       width: '50%',
       data: {
         comp: element,
@@ -64,17 +63,15 @@ export class ProductosComponent implements OnInit{
 
   }
 
-  eliminarProducto(index: number){
+  eliminarProveedor(index: number){
     const dialogRef = this.dialog.open(ConfirmationDialogComponent);
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
-        this.productoService.eliminar(index);
+        this.proveedorService.eliminar(index);
         this.cargarDetalle();
       }
     });
-
-    
   }
 
   filtrar(event: Event) {
@@ -83,4 +80,6 @@ export class ProductosComponent implements OnInit{
   }  
     
 };
+
+
 

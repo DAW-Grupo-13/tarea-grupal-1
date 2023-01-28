@@ -3,18 +3,19 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NavigationExtras, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { ClienteServiceService } from '../service/cliente-service.service';
+import { ProveedorService } from '../service/proveedor.service';
 
 
 @Component({
-  selector: 'app-modificar-cliente',
-  templateUrl: './modificar-cliente.component.html',
-  styleUrls: ['./modificar-cliente.component.css']
+  selector: 'app-modificar-proveedor',
+  templateUrl: './modificar-proveedor.component.html',
+  styleUrls: ['./modificar-proveedor.component.css']
 })
-export class ModificarClienteComponent {
+export class ModificarProveedorComponent {
+  
 
-  constructor(@Inject(MAT_DIALOG_DATA)public data: {comp: any, flag: any, index: any}, private router: Router, private dialogRef: MatDialogRef<ModificarClienteComponent>,
-  private clienteService: ClienteServiceService) { }
+  constructor(@Inject(MAT_DIALOG_DATA)public data: {comp: any, flag: any, index: any}, private router: Router, private dialogRef: MatDialogRef<ModificarProveedorComponent>,
+  private proveedorService: ProveedorService) { }
 
   ngOnInit(): void {
     
@@ -23,32 +24,34 @@ export class ModificarClienteComponent {
   //navigationExtras: NavigationExtras={};
 
   usuarioNuevo = new FormGroup({
-    cedula: new FormControl('',Validators.required),
+    codigo: new FormControl('',Validators.required),
+    ruc: new FormControl('',Validators.required),
     nombres: new FormControl('',Validators.required),
-    apellidos: new FormControl('', Validators.required),
     direccion: new FormControl('', Validators.required),
-    edad: new FormControl('', Validators.required)
+    telefono: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required)
   })
 
   
   onSubmit(flag: any, index: any) {
     const detalle = {
-      cedula: this.usuarioNuevo.value.cedula,
+      codigo: this.usuarioNuevo.value.codigo,
+      ruc: this.usuarioNuevo.value.ruc,
       nombres: this.usuarioNuevo.value.nombres,
-      apellidos: this.usuarioNuevo.value.apellidos,
       direccion: this.usuarioNuevo.value.direccion,
-      edad: this.usuarioNuevo.value.edad
+      telefono: this.usuarioNuevo.value.telefono,
+      email: this.usuarioNuevo.value.email
     };
 
     //Si flag es true crea un nuevo registro
     //Caso contrario lo actualiza 
     if(flag == true){
-      this.clienteService.agregar(detalle);
+      this.proveedorService.agregar(detalle);
     } else {
-      this.clienteService.modificar(detalle, index);
+      this.proveedorService.modificar(detalle, index);
     }
     
-    this.redirectTo('/cliente', detalle);
+    this.redirectTo('/proveedor', detalle);
     this.dialogRef.close();
     
   }
@@ -57,6 +60,7 @@ export class ModificarClienteComponent {
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
     this.router.navigate([uri],{ state: { data: detalle}}));
   }
+
 
   cancelar()
   {

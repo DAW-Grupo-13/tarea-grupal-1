@@ -1,6 +1,6 @@
 <div class="tabla-cliente">
     <br>
-    <h1>Clientes</h1>
+    <h1>Proveedor</h1>
     <br>
     <mat-icon>search</mat-icon>
     <mat-form-field>
@@ -14,9 +14,15 @@
 
     
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        <ng-container matColumnDef="cedula">
-            <th mat-header-cell *matHeaderCellDef> Cédula </th>
-            <td mat-cell *matCellDef="let element"> {{element.cedula}} </td>
+        
+        <ng-container matColumnDef="codigo">
+            <th mat-header-cell *matHeaderCellDef> Codigo </th>
+            <td mat-cell *matCellDef="let element"> {{element.codigo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="ruc">
+            <th mat-header-cell *matHeaderCellDef> Ruc </th>
+            <td mat-cell *matCellDef="let element"> {{element.ruc}} </td>
         </ng-container>
 
         <ng-container matColumnDef="nombres">
@@ -24,33 +30,34 @@
             <td mat-cell *matCellDef="let element" > {{element.nombres}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="apellidos">
-            <th mat-header-cell *matHeaderCellDef> Apellidos </th>
-            <td mat-cell *matCellDef="let element" > {{element.apellidos}} </td>
-        </ng-container>
-
         <ng-container matColumnDef="direccion">
-            <th mat-header-cell *matHeaderCellDef> Direccion </th>
-            <td mat-cell *matCellDef="let element"> {{element.direccion}} </td>
+            <th mat-header-cell *matHeaderCellDef> Dirección </th>
+            <td mat-cell *matCellDef="let element" > {{element.direccion}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="edad">
-            <th mat-header-cell *matHeaderCellDef> Edad </th>
-            <td mat-cell *matCellDef="let element"> {{element.edad}} </td>  
+        <ng-container matColumnDef="telefono">
+            <th mat-header-cell *matHeaderCellDef> Telefóno </th>
+            <td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Correo electrónico </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>  
         
         
         </ng-container>
         <ng-container matColumnDef="opciones">
             <th mat-header-cell *matHeaderCellDef> Opciones </th>
             <td mat-cell *matCellDef="let element; let i = index" >
-                <button mat-button color="primary" (click)="modificarCliente(element, i)">
+                <button mat-button color="primary" (click)="modificarProveedor(element, i)">
                     <mat-icon>edit</mat-icon>
                 </button>
-                <button mat-button color="warn" (click)="eliminarCliente(i)">
+                <button mat-button color="warn" (click)="eliminarProveedor(i)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </td>  
         </ng-container>
+    
     
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
