@@ -11,7 +11,7 @@ export class HomeComponent {
 
   constructor(private userService: UsersService){}
 
-  getNombre(): string{
+  getNombre(): any{
     return this.userService.getName();
   }
 

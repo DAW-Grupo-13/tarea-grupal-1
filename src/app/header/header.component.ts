@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AuthService } from '../auth.service';
 import { UsersService } from '../users/users.service'
 
 @Component({
@@ -8,11 +9,11 @@ import { UsersService } from '../users/users.service'
 })
 export class HeaderComponent implements OnInit{
   isAdmin = false;
-  nombreUsuario = "";
+  nombreUsuario:any = "";
 
   @Output() toggleSidenav = new EventEmitter<void>();
 
-  constructor(private userService: UsersService) {}
+  constructor(private userService: UsersService, private authService: AuthService) {}
 
   ngOnInit(): void {
     
@@ -23,7 +24,7 @@ export class HeaderComponent implements OnInit{
   }
 
   getUsuario(): string{
-    let username = this.userService.getName();
+    let username = this.authService.getUsername;
 
     if(this.isLogged()){
       this.nombreUsuario = username;
@@ -35,7 +36,7 @@ export class HeaderComponent implements OnInit{
     
     }
 
-    return username;
+    return this.nombreUsuario;
   }
 
   logout(): void{
@@ -45,12 +46,7 @@ export class HeaderComponent implements OnInit{
   }
 
   isLogged(): boolean{
-    let username = this.userService.getName();
-    let flag = false;
-    if(username != undefined && username != null && username != ""){
-      flag = true;
-    }
-    return flag;
+    return !!localStorage.getItem('token_value');
   }
 
 }

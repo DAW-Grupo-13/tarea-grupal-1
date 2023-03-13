@@ -7,7 +7,7 @@
                 <form [formGroup]="loginForm" (ngSubmit)="onLogin()">       
                     <mat-form-field class="full-width-input" appearance="fill">
                         <mat-label>Usuario</mat-label>
-                        <input matInput type="text" required formControlName="username" />
+                        <input matInput type="text" required formControlName="Usuario" />
                         <div *ngIf="loginForm.get('username')?.errors && loginForm.get('username')?.dirty">
                             <p *ngIf="loginForm.get('username')?.hasError('required')"> Campo obligatorio </p>
                         </div>
@@ -15,7 +15,7 @@
     
                     <mat-form-field class="full-width-input separator">
                         <mat-label>Contraseña</mat-label>
-                        <input matInput type="password" required formControlName="password" />
+                        <input matInput type="password" required formControlName="Clave" />
                     </mat-form-field>
     
                     <button mat-raised-button color="primary" type="submit">Login</button>

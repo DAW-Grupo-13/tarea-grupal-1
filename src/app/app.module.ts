@@ -22,6 +22,8 @@ import { ModificarProductosComponent } from './modulo-productos/modificar-produc
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { ProveedorComponent } from './modulo-proveedor/proveedor/proveedor.component';
 import { ModificarProveedorComponent } from './modulo-proveedor/modificar-proveedor/modificar-proveedor.component';
+import { AuthService } from './auth.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -48,10 +50,12 @@ import { ModificarProveedorComponent } from './modulo-proveedor/modificar-provee
     SidebarModule,
     ToastNotificationsModule,
     ReactiveFormsModule,
+    HttpClientModule
    // HomeModule
   ],
   providers: [CookieService, Toaster,
-    {provide: TOAST_NOTIFICATIONS_CONFIG, useValue: {duration: 3000, position: "top-right"}}
+    {provide: TOAST_NOTIFICATIONS_CONFIG, useValue: {duration: 3000, position: "top-right"}},
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

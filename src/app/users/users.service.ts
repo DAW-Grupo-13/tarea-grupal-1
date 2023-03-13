@@ -1,31 +1,29 @@
 import { Injectable } from "@angular/core";
 import { CookieService } from "ngx-cookie-service";
+import { AuthService } from "../auth.service";
 
 @Injectable({
     providedIn: "root"
   })
 
 export class UsersService {
-  constructor(private cookies: CookieService) {}
-
-  setUserName(user: string){
-    this.cookies.set("username", user);
-  }
+  constructor(private service: AuthService) {}
   
   getUserName(){
-    return this.cookies.get("username");
+    return localStorage.getItem('userName');
   }
 
-  setName(name: string){
+  /*setName(name: string){
     this.cookies.set("name", name);
-  }
+  }*/
 
-  getName(){
-    return this.cookies.get("name");
+  getName(): any{
+    return this.service.getUsername;
   }
 
   logout(){
-    this.cookies.deleteAll();
+    localStorage.setItem('userName', '');
+    localStorage.setItem('token_value', '');
   }
 
 }

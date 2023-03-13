@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { NotificacionesService } from '../../../notificaciones/notificaciones.service';
 import { UsersService } from '../../../users/users.service'
 import { Notificacion } from 'src/app/notificaciones/notificacion';
+import { AuthService } from 'src/app/auth.service';
+import { UsuarioInterface } from 'src/app/interfaces/UsuarioInterface';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +14,12 @@ import { Notificacion } from 'src/app/notificaciones/notificacion';
 })
 export class LoginComponent implements OnInit {
   loginForm = this.fb.group({
-    username: [''],
-    password: ['']
+    Usuario: [''],
+    Clave: ['']
   })
+
+  usuario: any
+  name: any
 
   users = [
     {
@@ -44,7 +49,7 @@ export class LoginComponent implements OnInit {
   ]
 
   constructor(private fb: FormBuilder, private router: Router, private userService: UsersService, 
-    private notificacionService: NotificacionesService){
+    private notificacionService: NotificacionesService, private service: AuthService){
       let name = this.userService.getName();
       if(name != null && name != ""){
         this.router.navigate(['inicio']);
@@ -54,9 +59,9 @@ export class LoginComponent implements OnInit {
   
 
   ngOnInit(): void {
-    let name = this.userService.getName();
-    if(name == null || name == undefined){
-      this.router.navigate(['inicio']);
+    this.name = this.userService.getName();
+    if(this.name == null || this.name == undefined){
+      //this.router.navigate(['inicio']);
     }
   }
 
@@ -86,23 +91,22 @@ export class LoginComponent implements OnInit {
 
   //Inicia sesion
   onLogin(): void{
-    const formValue = this.loginForm.value;
-    let usuario = formValue.username;
-    let clave = formValue.password;
-    let isValid = this.validateUser(usuario, clave);
-
-    if(usuario != "" && clave != ""){
-      if(isValid){
-        let nombre = this.buscaUsuario(usuario);
-        this.userService.setUserName(usuario as string);
-        this.userService.setName(nombre);
-        this.notificacionService.showToast(Notificacion.SUCCES, "Inicio de sesion exitoso", "");
-        this.router.navigate(['inicio']);
-      } else {
-        this.notificacionService.showToast(Notificacion.DANGER, "Usuario o contraseña incorrecto", "");
-      }
+    this.usuario = this.loginForm.value.Usuario;
+    
+    let userAux = {
+      Id: 1,
+      Usuario: this.usuario,
+      Clave: this.loginForm.value.Clave
     }
     
+    this.service.login(userAux as UsuarioInterface).subscribe((data:any) =>{
+      
+      localStorage.setItem('userName', this.usuario);
+      localStorage.setItem('token_value', data);
+      this.notificacionService.showToast(Notificacion.SUCCES, "Inicio de sesion exitoso", "");
+      this.router.navigate(['inicio']);
+    },
+    (errorData) => this.notificacionService.showToast(Notificacion.DANGER, "Usuario o contraseña incorrecto", ""))    
   }
 
 
